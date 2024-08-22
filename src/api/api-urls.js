@@ -1,4 +1,4 @@
-export const IP = 'https://gettharves.app/';
+export const IP = 'https://getharvest.app/';
 
 export const URLS = {
   auth: {

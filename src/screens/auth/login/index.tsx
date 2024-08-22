@@ -25,19 +25,28 @@ export default function Login({}) {
   const [loading, setLoading] = React.useState(false);
   const [password, setPassword] = React.useState('HarvestTest#456');
   const dispatch = useDispatch();
+
   const loginHandler = async () => {
     try {
       setLoading(true);
-      dispatch(setLogin('TOKEN'));
-      const res = await fetch(URLS.auth.login, {email, password});
-      console.log('🚀 ~ return ~ res:', res);
-    } catch (error: any) {
-      console.log('🚀 ~ loginHandler ~ error:', error);
-      // const errorMessage =
-      //   error.response && error.response.data && error.response.data.message
-      //     ? error.response.data.message
-      //     : 'Invalid email or password';
-      // Alert.alert('Login failed', JSON.stringify(error));
+      const loginPayload = {
+        email: email,
+        password: password,
+      };
+      dispatch(setLogin('token'));
+      console.log(URLS.auth.login, loginPayload, 'payloads');
+
+      const response = await axios.post(
+        'https://getharvest.app/auth/login',
+        loginPayload,
+      );
+
+      const token = response.data.token;
+      console.log('JWT Token:', token);
+
+      dispatch(setLogin(token));
+    } catch (error) {
+      console.log('Error during login :', error);
     } finally {
       setLoading(false);
     }

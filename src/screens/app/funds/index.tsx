@@ -14,13 +14,13 @@ export default function Funds({}) {
   useEffect(() => {
     const fetchFundsData = async () => {
       try {
-        const response = await axios.get('https://gettharves.app/funds/all');
+        const response = await axios.get('https://getharves.app/funds/all');
         console.log(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
-    fetchFundsData();
+    // fetchFundsData();
   }, []);
 
   return (
